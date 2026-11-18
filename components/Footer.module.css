@@ -1,0 +1,17 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px var(--page-pad);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.brand {
+  color: var(--text);
+  font-weight: 800;
+  text-transform: uppercase;
+}
