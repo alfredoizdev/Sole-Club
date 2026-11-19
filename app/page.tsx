@@ -7,13 +7,15 @@ import ProductMosaic from "@/components/ProductMosaic";
 import { products } from "@/lib/products";
 import styles from "./page.module.css";
 
+const bannerProduct = products.find((product) => product.id === "volt-air-glide")!;
+
 export default function HomePage() {
   return (
     <CartProvider>
       <div className={styles.page}>
         <Header />
         <main className={styles.main}>
-          <Banner />
+          <Banner product={bannerProduct} />
           <ProductMosaic products={products} />
         </main>
         <Footer />

@@ -1,4 +1,8 @@
 .banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
   padding: clamp(40px, 8vw, 96px) 0 clamp(28px, 5vw, 56px);
 }
 
@@ -14,10 +18,71 @@
 .title {
   margin: 0;
   max-width: 12ch;
-  font-size: clamp(2.6rem, 10vw, 7.5rem);
+  font-size: clamp(2.6rem, 7vw, 6.5rem);
   font-weight: 900;
   line-height: 0.92;
   letter-spacing: -0.04em;
   text-transform: uppercase;
   overflow-wrap: break-word;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: clamp(20px, 3vw, 32px);
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: #e10600;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.cta:hover {
+  background: #b30500;
+}
+
+.cta:active {
+  transform: scale(0.96);
+}
+
+.sneaker {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 60px rgb(0 0 0 / 0.5);
+  animation: float 6s ease-in-out infinite;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sneaker {
+    animation: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .banner {
+    grid-template-columns: 1fr;
+  }
+
+  .sneaker {
+    width: min(100%, 420px);
+    justify-self: center;
+  }
 }
