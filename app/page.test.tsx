@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { formatPrice, products } from "@/lib/products";
@@ -20,10 +21,25 @@ describe("home page", () => {
     expect(cartCount()).toBe("0");
   });
 
-  it("shows the banner headline and the footer", () => {
+  it("shows the banner with a floating sneaker, headline, Shop now link, and the footer", () => {
     setup();
     expect(screen.getByRole("heading", { level: 1, name: "Fresh pairs every week" })).toBeInTheDocument();
+    const sneaker = screen.getByTestId("banner-sneaker");
+    expect(sneaker).toHaveClass("sneaker");
+    expect(within(sneaker).getByRole("img", { name: "Volt Air Glide" })).toBeInTheDocument();
+    const shopNow = screen.getByRole("link", { name: "Shop now" });
+    expect(shopNow).toHaveAttribute("href", "#products");
+    expect(shopNow).toHaveClass("cta");
+    expect(screen.getByRole("region", { name: "Products" })).toHaveAttribute("id", "products");
     expect(screen.getByRole("contentinfo")).toHaveTextContent("Sole Club");
+  });
+
+  it("tilts the sneaker as it floats and makes the Shop now button red", () => {
+    const css = readFileSync("components/Banner.module.css", "utf8");
+    const float = css.slice(css.indexOf("@keyframes float"));
+    expect(float).toMatch(/translateY\(0\) rotate\(-3deg\)/);
+    expect(float).toMatch(/translateY\(-18px\) rotate\(3deg\)/);
+    expect(css).toMatch(/\.cta \{[^}]*background: #e10600;/);
   });
 
   it("shows six tiles with photo, name, price and an Add to cart button, the first one featured", () => {
