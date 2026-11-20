@@ -1,16 +1,40 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCart } from "./CartProvider";
 import styles from "./Header.module.css";
 
+const menu = [
+  { href: "/new-drops", label: "New drops" },
+  { href: "/men", label: "Men" },
+  { href: "/women", label: "Women" },
+];
+
 export default function Header() {
   const { count, open } = useCart();
+  const pathname = usePathname();
 
   return (
     <header className={styles.header}>
       <a href="/" className={styles.brand}>
         Sole Club
       </a>
+      <nav aria-label="Main" className={styles.nav}>
+        {menu.map(({ href, label }) => {
+          const current = pathname === href;
+          return (
+            <Link
+              key={href}
+              href={href}
+              className={current ? `${styles.navLink} ${styles.active}` : styles.navLink}
+              aria-current={current ? "page" : undefined}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </nav>
       <button
         type="button"
         className={styles.cartButton}

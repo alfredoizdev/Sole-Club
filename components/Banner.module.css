@@ -31,7 +31,7 @@
   margin-top: clamp(20px, 3vw, 32px);
   padding: 14px 28px;
   border-radius: 999px;
-  background: #e10600;
+  background: var(--red);
   color: #fff;
   font-weight: 800;
   text-decoration: none;
