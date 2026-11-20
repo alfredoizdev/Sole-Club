@@ -39,7 +39,8 @@ describe("home page", () => {
     const float = css.slice(css.indexOf("@keyframes float"));
     expect(float).toMatch(/translateY\(0\) rotate\(-3deg\)/);
     expect(float).toMatch(/translateY\(-18px\) rotate\(3deg\)/);
-    expect(css).toMatch(/\.cta \{[^}]*background: #e10600;/);
+    expect(css).toMatch(/\.cta \{[^}]*background: var\(--red\);/);
+    expect(readFileSync("app/globals.css", "utf8")).toMatch(/--red: #e10600;/);
   });
 
   it("shows six tiles with photo, name, price and an Add to cart button, the first one featured", () => {
