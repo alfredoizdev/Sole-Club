@@ -3,7 +3,7 @@
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   align-items: center;
   gap: clamp(24px, 5vw, 64px);
-  padding: clamp(40px, 8vw, 96px) 0 clamp(28px, 5vw, 56px);
+  padding: clamp(40px, 8vw, 96px) var(--page-pad) clamp(28px, 5vw, 56px);
 }
 
 .eyebrow {
@@ -48,6 +48,8 @@
 
 .sneaker {
   position: relative;
+  width: min(100%, 504px);
+  justify-self: center;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: var(--radius);

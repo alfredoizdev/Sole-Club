@@ -43,6 +43,22 @@ describe("home page", () => {
     expect(readFileSync("app/globals.css", "utf8")).toMatch(/--red: #e10600;/);
   });
 
+  it("stretches the banner across the full page width while the products stay centered", () => {
+    setup();
+    const banner = screen.getByRole("heading", { level: 1 }).closest("section")!;
+    expect(banner.parentElement).toHaveClass("main");
+    expect(screen.getByRole("region", { name: "Products" }).parentElement).toHaveClass("content");
+    const pageCss = readFileSync("app/page.module.css", "utf8");
+    expect(pageCss).toMatch(/\.main \{(?![^}]*max-width)[^}]*\}/);
+    expect(pageCss).toMatch(/\.content \{[^}]*max-width: 1280px;/);
+    expect(readFileSync("components/Banner.module.css", "utf8")).toMatch(
+      /\.banner \{[^}]*padding: [^;]*var\(--page-pad\)/,
+    );
+    expect(readFileSync("components/Banner.module.css", "utf8")).toMatch(
+      /\.sneaker \{[^}]*width: min\(100%, 504px\);/,
+    );
+  });
+
   it("shows six tiles with photo, name, price and an Add to cart button, the first one featured", () => {
     const { tiles } = setup();
     expect(tiles).toHaveLength(6);
