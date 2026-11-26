@@ -16,7 +16,9 @@ export default function HomePage() {
         <Header />
         <main className={styles.main}>
           <Banner product={bannerProduct} />
-          <ProductMosaic products={products} />
+          <div className={styles.content}>
+            <ProductMosaic products={products} />
+          </div>
         </main>
         <Footer />
       </div>
